@@ -28,19 +28,20 @@ public class GetalRij {
 			getallen[i] = getal;
 		}
 	}
-	
+
 	public boolean zitErinA( int zoekWaarde )
-    {
-		int counter = 0;
-        boolean found = false;
-        while (counter < getallen.length)
-        {
-            if (getallen[counter] == zoekWaarde)
-                found = true;
-            counter++;
-        }
-		return found;
+	{
+		int counter = 0;							// 1 stap
+		boolean found = false;						// 1 stap
+		while (counter < getallen.length)			// n stappen
+		{
+			if (getallen[counter] == zoekWaarde)	// 1 stap
+				found = true;						// 1 stap
+			counter++;								// 1 stap
+		}
+		return found;								// 1 stap
 	}
+
 
 	public boolean zitErinB( int zoekWaarde )
     {
@@ -71,6 +72,25 @@ public class GetalRij {
 	}
 
 	public boolean zitErinD( int zoekWaarde ){
+		int low = 0;
+		int high = getallen.length - 1;
+
+		while (high >= low)
+		{
+			int mid = (high + low) / 2;
+			if (zoekWaarde < getallen[mid])
+			{
+				high = mid - 1;
+			}
+			else if (zoekWaarde == getallen[mid])
+			{
+				return true;
+			}
+			else
+			{
+				low = mid + 1;
+			}
+		}
 		return false;
 	}
 	
