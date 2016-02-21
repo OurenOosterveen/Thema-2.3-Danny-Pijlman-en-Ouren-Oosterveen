@@ -10,6 +10,7 @@ public class GetalRij {
 		// Belangrijke aanname: aantal < max, anders kunnen de getallen niet uniek zijn.
 		getallen = new int[aantal];
 		vulArrayMetUniekeWaarden( aantal, max );
+        sorteer();
 	}
 
 	private void vulArrayMetUniekeWaarden(int aantal, int max) {
@@ -28,16 +29,45 @@ public class GetalRij {
 		}
 	}
 	
-	public boolean zitErinA( int zoekWaarde ){
-		return false;
+	public boolean zitErinA( int zoekWaarde )
+    {
+		int counter = 0;
+        boolean found = false;
+        while (counter < getallen.length)
+        {
+            if (getallen[counter] == zoekWaarde)
+                found = true;
+            counter++;
+        }
+		return found;
 	}
 
-	public boolean zitErinB( int zoekWaarde ){
-		return false;
+	public boolean zitErinB( int zoekWaarde )
+    {
+        int counter = 0;
+        while (counter < getallen.length)
+        {
+            if (getallen[counter] == zoekWaarde)
+                return true;
+            counter++;
+        }
+        return false;
 	}
 
 	public boolean zitErinC( int zoekWaarde ){
-		return false;
+        int counter = 0;
+        while (counter < getallen.length)
+        {
+            if (getallen[counter] == zoekWaarde) {
+                return true;
+            }
+            else if (getallen[counter] > zoekWaarde) {
+                break;
+            }
+            counter++;
+        }
+        System.out.println("FUCK YOU" + counter);
+        return false;
 	}
 
 	public boolean zitErinD( int zoekWaarde ){
