@@ -1,6 +1,7 @@
 package test;
 import junit.framework.TestCase;
 import classifier.*;
+import classifier.TreeFileReader;
 
 import java.io.*;
 import java.io.FileReader;
@@ -8,8 +9,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class TestFileReader extends TestCase {
-	private static final String RESULTS_FILE = "OptieText.txt";
-	private static final String CAT_FILE = "CatText.txt";
+	private static final String RESULTS_FILE = "./src/testOptieText.txt";
+	private static final String CAT_FILE = "./src/test/CatText.txt";
 	private ArrayList<Node> optionList = new ArrayList<Node>();
 
 	public TestFileReader(String arg0) {
@@ -96,9 +97,16 @@ public class TestFileReader extends TestCase {
     }
 
 	public void testCategory(){
-		DecisionTree dt = buildTree();
+		//DecisionTree dt = buildTree();
+        TreeFileReader fr = new TreeFileReader();
+        DecisionTree dt = null;
+        try {
+            dt = fr.test();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		FeatureType yn = new FeatureType("YesNo"
+        FeatureType yn = new FeatureType("YesNo"
 						,new String[]{"yes","no"});
 
 		Feature[] features = new Feature[]
@@ -111,9 +119,9 @@ public class TestFileReader extends TestCase {
 		  new Feature("AC","yes",yn),
 		  new Feature("Metalic","yes",yn)
 		};
-		
+
 		Item item = new Item("car",features);
-		
+
 		String category = dt.assignCategory(item);
 		assertEquals("High",category);
 		
